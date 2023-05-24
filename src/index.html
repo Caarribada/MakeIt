@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <link rel="stylesheet" href="style.css">
+    <title>My To Do tasks</title>
+  </head>
+  <body onload="init()">
+    <script type="application/javascript" src="script.js"></script>
+
+
+    <div class="flex-container" style="margin-top: 10px;">
+        <div class="menu" onclick="menuClicked('todo')">
+        <p class="menu-clicked" id="todo">To Do</p>
+        </div>
+        <div class="menu" onclick="menuClicked('completed')">
+            <p class="menu-option" id="completed">Completed</p>
+        </div>
+    </div>
+
+    <div class="flex-container" style="justify-content: normal;">
+        <div class="add-task">
+        <button class="btn-add" onclick="openModal('createModal')">Add new Task</button>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="filter-icon" onclick="openModal('filterModal')">
+            <path fill="currentColor" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+        </svg>
+    </div>
+    
+
+    <div class="task-container">
+
+    </div>
+    
+    <div id="createModal" class="modal">
+
+        <div class="modal-content">
+            <span id="close" class="close" onclick="closeModal('createModal', document.getElementsByClassName('menu-clicked')[0].id)">&times;</span>
+            <p style="font-size: 20px;">Adding a new to do task</p>
+            <input type="text" placeholder="Type your new task..." class="input-text" id="input-text"/> 
+            <select class="input-text" style="margin-top: 15px; width: 388px;" id="input-select">
+                <option value="" disabled selected>Choose a priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+            <input type="date" class="input-text" style="margin-top: 15px; width: 383px;" id="input-date"/>
+            <button class="btn-add" onclick="createTask()" style="width: 100%;">Add</button>
+        </div>
+      
+    </div>
+
+    <div id="editModal" class="modal">
+
+      <div class="modal-content">
+          <span class="close" onclick="closeModal('editModal')">&times;</span>
+          <p style="font-size: 20px;">Edit task</p>
+          <input type="text" class="input-text" id="input-text2"/> 
+          <select class="input-text" style="margin-top: 15px; width: 388px;" id="input-select2">
+              <option value="" disabled selected>Choose a priority</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+          </select>
+          <input type="date" class="input-text" style="margin-top: 15px; width: 383px;" id="input-date2"/>
+          <button id="btn-edit" class="btn-add" style="width: 100%;">Save</button>
+      </div>
+    
+    </div>
+
+    <div id="optionsModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('optionsModal')">&times;</span>
+            <p style="font-size: 20px;"> Task Infos </p>
+            <p id="p-deadline"> </p>
+            <div id="notes-container" style="overflow-y: auto; max-height: 400px;"></div>
+            <textarea id="note-textarea" placeholder="Write a note..."></textarea>
+            <button id="btn-add-note" class="btn-add" style="width: 100%;">Add note</button>
+        </div>
+      
+    </div>
+
+    <div id="filterModal" class="modal">
+        <div class="modal-content filter-modal">
+            <p class="filter-option" onclick="sort(1)">Deadline</p>
+            <p class="filter-option" onclick="sort(2)">Priority</p>
+            <p class="filter-option" onclick="sort(3)">Most recent</p>
+        </div>
+    </div>
+
+  </body>
+</html>
